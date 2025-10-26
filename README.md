@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![Language: JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow.svg)](https://www.javascript.com/)
 [![Platform: Web](https://img.shields.io/badge/Platform-Web-blue.svg)](https://developer.mozilla.org/en-US/docs/Web)
+[![GitHub Pages](https://img.shields.io/badge/Demo-GitHub%20Pages-brightgreen.svg)](https://lab8010.github.io/container-file-builder/)
 
 **子供向けビジュアルプログラミングツール - Scratchライクな操作でContainerfile/Dockerfileを簡単に作成！**
 
@@ -48,11 +49,19 @@ Red Hat Enterprise Linux、Fedora、CentOS Streamなど、Red Hat系ディスト
 
 ## 🚀 セットアップ
 
-### 必要な環境
+### 🌐 オンラインデモ（推奨）
+
+**インストール不要！今すぐブラウザで試せます：**
+
+👉 **https://lab8010.github.io/container-file-builder/**
+
+### ローカル環境での実行
+
+#### 必要な環境
 - モダンなWebブラウザ（Chrome、Firefox、Safari、Edgeなど）
 - Python 3（ローカルサーバー起動用、オプション）
 
-### インストール手順
+#### インストール手順
 
 1. **リポジトリをクローン**
 ```bash
