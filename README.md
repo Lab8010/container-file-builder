@@ -8,7 +8,7 @@
 
 Container File Builderは、Scratchのような直感的なドラッグ&ドロップUIを使って、Containerfile（Dockerfile）を視覚的に作成できる教育用ツールです。プログラミング初心者やコンテナ技術を学び始めた方に最適です。
 
-Red Hat Enterprise Linux、Fedora、CENTOSStreamなど、Red Hat系ディストリビューションに最適化されています。
+Red Hat Enterprise Linux、Fedora、CentOS Streamなど、Red Hat系ディストリビューションに最適化されています。
 
 ![Container File Builder Screenshot](https://img.shields.io/badge/Status-Ready%20to%20Use-brightgreen.svg)
 
