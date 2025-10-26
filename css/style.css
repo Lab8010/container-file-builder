@@ -1,0 +1,680 @@
+/* リセットとベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Hiragino Sans', 'Meiryo', sans-serif;
+    background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%);
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    height: calc(100vh - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+.header {
+    background: linear-gradient(135deg, #CC0000 0%, #A00000 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* ボタンスタイル */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-success {
+    background: #CC0000;
+    color: white;
+}
+
+.btn-warning {
+    background: #FF9800;
+    color: white;
+}
+
+.btn-secondary {
+    background: #607D8B;
+    color: white;
+}
+
+.btn-info {
+    background: #00BCD4;
+    color: white;
+    position: relative;
+}
+
+/* メインコンテンツ */
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ブロックパレット */
+.blocks-palette {
+    width: 280px;
+    background: #f5f5f5;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 3px solid #ddd;
+}
+
+.blocks-palette h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.palette-category {
+    margin-bottom: 25px;
+}
+
+.palette-category h3 {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #e0e0e0;
+    border-radius: 8px;
+}
+
+.blocks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ブロックスタイル */
+.block {
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: grab;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    user-select: none;
+    position: relative;
+}
+
+.block:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.block:active {
+    cursor: grabbing;
+}
+
+.block.dragging {
+    opacity: 0.5;
+}
+
+/* ブロックタイプ別の色 */
+.block-from { background: linear-gradient(135deg, #FF6B6B, #EE5A6F); }
+.block-run { background: linear-gradient(135deg, #4ECDC4, #44A08D); }
+.block-cmd { background: linear-gradient(135deg, #95E1D3, #38B2AC); }
+.block-copy { background: linear-gradient(135deg, #FFA07A, #FF8C69); }
+.block-add { background: linear-gradient(135deg, #FFB347, #FFCC33); }
+.block-workdir { background: linear-gradient(135deg, #9B59B6, #8E44AD); }
+.block-env { background: linear-gradient(135deg, #3498DB, #2980B9); }
+.block-expose { background: linear-gradient(135deg, #E74C3C, #C0392B); }
+.block-user { background: linear-gradient(135deg, #F39C12, #D68910); }
+.block-volume { background: linear-gradient(135deg, #1ABC9C, #16A085); }
+.block-entrypoint { background: linear-gradient(135deg, #34495E, #2C3E50); }
+.block-label { background: linear-gradient(135deg, #7F8C8D, #95A5A6); }
+.block-arg { background: linear-gradient(135deg, #C39BD3, #BB8FCE); }
+.block-shell { background: linear-gradient(135deg, #85C1E2, #6BB6D6); }
+
+.block-type {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.block-description {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-weight: normal;
+}
+
+/* キャンバスエリア */
+.canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    overflow: hidden;
+}
+
+.canvas-header {
+    padding: 20px;
+    background: #fafafa;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.canvas-header h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.help-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.canvas {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+    min-height: 400px;
+}
+
+.canvas-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #bbb;
+    font-size: 18px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.canvas.has-blocks .canvas-placeholder {
+    display: none;
+}
+
+.canvas.drag-over {
+    background: #ffebee;
+    border: 3px dashed #CC0000;
+}
+
+/* キャンバス内のブロック */
+.canvas-block {
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    cursor: move;
+    position: relative;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.canvas-block:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-block.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+}
+
+.canvas-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.canvas-block-type {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.canvas-block-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.block-action-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.block-action-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.canvas-block-content {
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.95;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+.canvas-block-content code {
+    font-family: 'Courier New', monospace;
+}
+
+/* プレビューパネル */
+.preview-panel {
+    width: 400px;
+    background: #2d2d2d;
+    color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid #ddd;
+}
+
+.preview-panel h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.preview-content {
+    flex: 1;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 15px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+
+#preview {
+    margin: 0;
+    color: #d4d4d4;
+}
+
+#preview code {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 20px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 25px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 15px 25px;
+    background: #f5f5f5;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-help {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    white-space: pre-line;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border-left: 3px solid #CC0000;
+}
+
+/* スクロールバーのカスタマイズ */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .preview-panel {
+        width: 300px;
+    }
+    
+    .blocks-palette {
+        width: 240px;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .blocks-palette,
+    .preview-panel {
+        width: 100%;
+        max-height: 300px;
+    }
+}
+
+/* FROMプロンプトメッセージ */
+.from-prompt {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    border: 2px solid #CC0000;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(204, 0, 0, 0.15);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 10px rgba(204, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+    }
+}
+
+.from-prompt.hidden {
+    display: none;
+}
+
+.from-prompt-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.from-prompt-content h3 {
+    color: #CC0000;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.from-prompt-content p {
+    color: #333;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* サンプルセクション */
+.samples-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px 30px;
+    border-bottom: 3px solid #dee2e6;
+}
+
+.samples-title {
+    color: #CC0000;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.samples-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sample-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    width: 280px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    display: flex;
+    gap: 12px;
+}
+
+.sample-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(204, 0, 0, 0.2);
+    border-color: #CC0000;
+}
+
+.sample-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.sample-content {
+    flex: 1;
+}
+
+.sample-content h4 {
+    color: #CC0000;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.sample-level {
+    color: #FFA000;
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.sample-description {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* 通知アニメーション */
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container File Builder - 子供向けビジュアルプログラミング</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1>🎩 Container File Builder</h1>
+            <div class="header-buttons">
+                <button id="langToggle" class="btn btn-secondary" title="Switch Language / 言語切替">🌐 <span id="currentLang">日本語</span></button>
+                <button id="clearBtn" class="btn btn-warning"><span class="i18n" data-ja="クリア" data-en="Clear">クリア</span></button>
+                <button id="previewBtn" class="btn btn-primary"><span class="i18n" data-ja="プレビュー" data-en="Preview">プレビュー</span></button>
+                <button id="downloadBtn" class="btn btn-success"><span class="i18n" data-ja="ダウンロード" data-en="Download">ダウンロード</span></button>
+            </div>
+        </header>
+
+        <!-- サンプルセクション -->
+        <section class="samples-section">
+            <h3 class="samples-title">
+                <span class="i18n" data-ja="📚 サンプルから始める" data-en="📚 Start with Samples">📚 サンプルから始める</span>
+            </h3>
+            <div class="samples-container">
+                <div class="sample-card" onclick="loadSample('webserver')">
+                    <div class="sample-icon">🌐</div>
+                    <div class="sample-content">
+                        <h4 class="i18n" data-ja="静的Webサーバー" data-en="Static Web Server">静的Webサーバー</h4>
+                        <p class="sample-level">⭐ <span class="i18n" data-ja="初級" data-en="Beginner">初級</span></p>
+                        <p class="sample-description i18n" data-ja="Apache (httpd)を使った基本的なWebサーバー" data-en="Basic web server using Apache (httpd)">Apache (httpd)を使った基本的なWebサーバー</p>
+                    </div>
+                </div>
+                
+                <div class="sample-card" onclick="loadSample('breakout')">
+                    <div class="sample-icon">🎮</div>
+                    <div class="sample-content">
+                        <h4 class="i18n" data-ja="ブロック崩しゲーム" data-en="Breakout Game">ブロック崩しゲーム</h4>
+                        <p class="sample-level">⭐⭐ <span class="i18n" data-ja="中級" data-en="Intermediate">中級</span></p>
+                        <p class="sample-description i18n" data-ja="HTML5 Canvasで作られたゲーム" data-en="Game built with HTML5 Canvas">HTML5 Canvasで作られたゲーム</p>
+                    </div>
+                </div>
+                
+                <div class="sample-card" onclick="loadSample('multistage')">
+                    <div class="sample-icon">🚀</div>
+                    <div class="sample-content">
+                        <h4 class="i18n" data-ja="マルチステージビルド" data-en="Multi-stage Build">マルチステージビルド</h4>
+                        <p class="sample-level">⭐⭐⭐ <span class="i18n" data-ja="上級" data-en="Advanced">上級</span></p>
+                        <p class="sample-description i18n" data-ja="Goアプリの最適化ビルド" data-en="Optimized Go application build">Goアプリの最適化ビルド</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <!-- 左側: ブロックパレット -->
+            <aside class="blocks-palette">
+                <h2 class="i18n" data-ja="📦 命令ブロック" data-en="📦 Instruction Blocks">📦 命令ブロック</h2>
+                <div class="palette-category">
+                    <h3 class="i18n" data-ja="基本命令" data-en="Basic">基本命令</h3>
+                    <div id="basicBlocks" class="blocks-container"></div>
+                </div>
+                <div class="palette-category">
+                    <h3 class="i18n" data-ja="ファイル操作" data-en="File Operations">ファイル操作</h3>
+                    <div id="fileBlocks" class="blocks-container"></div>
+                </div>
+                <div class="palette-category">
+                    <h3 class="i18n" data-ja="実行命令" data-en="Execution">実行命令</h3>
+                    <div id="execBlocks" class="blocks-container"></div>
+                </div>
+                <div class="palette-category">
+                    <h3 class="i18n" data-ja="その他" data-en="Others">その他</h3>
+                    <div id="otherBlocks" class="blocks-container"></div>
+                </div>
+            </aside>
+
+            <!-- 中央: キャンバス -->
+            <main class="canvas-area">
+                <div class="canvas-header">
+                    <h2 class="i18n" data-ja="🎨 キャンバス（ここにブロックをドロップ）" data-en="🎨 Canvas (Drop blocks here)">🎨 キャンバス（ここにブロックをドロップ）</h2>
+                    <p class="help-text i18n" data-ja="左側のブロックをドラッグして、ここに並べてください" data-en="Drag blocks from the left panel and arrange them here">左側のブロックをドラッグして、ここに並べてください</p>
+                </div>
+                <div id="canvas" class="canvas">
+                    <div class="canvas-placeholder i18n" data-ja="ブロックをここにドラッグしてContainerfileを作成しよう！" data-en="Drag blocks here to create your Containerfile!">
+                        ブロックをここにドラッグしてContainerfileを作成しよう！
+                    </div>
+                </div>
+            </main>
+
+            <!-- 右側: プレビュー -->
+            <aside class="preview-panel">
+                <!-- FROMプロンプトメッセージ -->
+                <div id="fromPrompt" class="from-prompt">
+                    <div class="from-prompt-icon">🏗️</div>
+                    <div class="from-prompt-content">
+                        <h3 class="i18n" data-ja="まず始めに、FROMでベースイメージを指定しましょう" data-en="First, specify a base image with FROM">まず始めに、FROMでベースイメージを指定しましょう</h3>
+                        <p class="i18n" data-ja="左側のパレットから「FROM」ブロックをキャンバスにドラッグしてください" data-en="Drag the FROM block from the left palette to the canvas">左側のパレットから「FROM」ブロックをキャンバスにドラッグしてください</p>
+                    </div>
+                </div>
+
+                <h2>👀 <span class="i18n" data-ja="Containerfileプレビュー" data-en="Containerfile Preview">Containerfileプレビュー</span></h2>
+                <div class="preview-content">
+                    <pre id="preview"><code class="i18n" data-ja="# ここにContainerfileが表示されます
+# 左側のブロックをキャンバスに追加してください" data-en="# Your Containerfile will be displayed here
+# Add blocks from the left panel to the canvas"># ここにContainerfileが表示されます
+# 左側のブロックをキャンバスに追加してください</code></pre>
+                </div>
+                <div class="preview-actions">
+                    <button id="copyBtn" class="btn btn-secondary">📋 コピー</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- モーダル: ブロック編集 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">ブロックを編集</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- 動的に生成 -->
+            </div>
+            <div class="modal-footer">
+                <button id="modalCancel" class="btn btn-secondary">キャンセル</button>
+                <button id="modalSave" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/blocks.js"></script>
+    <script src="js/samples.js"></script>
+    <script src="js/dragdrop.js"></script>
+    <script src="js/preview.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
