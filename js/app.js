@@ -211,6 +211,18 @@ function openEditModal(blockId) {
         formHTML += `</div>`;
     });
     
+    // ランタイム固有のアドバイスを追加
+    if (typeof getRuntimeAdvice === 'function') {
+        const advice = getRuntimeAdvice(def.type);
+        if (advice) {
+            formHTML += `
+                <div class="runtime-advice">
+                    ${advice}
+                </div>
+            `;
+        }
+    }
+    
     modalBody.innerHTML = formHTML;
     
     // モーダルを表示

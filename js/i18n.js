@@ -59,6 +59,11 @@ function applyLanguage(lang) {
     // ブロックの説明も更新
     updateBlockDescriptions(lang);
     
+    // ランタイム情報パネルも更新
+    if (typeof updateRuntimeInfo === 'function' && typeof getCurrentRuntime === 'function') {
+        updateRuntimeInfo(getCurrentRuntime());
+    }
+    
     // プレビューも更新（ブロックがない場合の初期メッセージを更新）
     if (typeof updatePreview === 'function') {
         updatePreview();

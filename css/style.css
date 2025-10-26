@@ -92,6 +92,18 @@ body {
     position: relative;
 }
 
+.btn-runtime {
+    background: linear-gradient(135deg, #8E24AA 0%, #5E35B1 100%);
+    color: white;
+    font-weight: bold;
+    border: 2px solid #7B1FA2;
+}
+
+.btn-runtime:hover {
+    background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+    border-color: #8E24AA;
+}
+
 /* メインコンテンツ */
 .main-content {
     display: flex;
@@ -676,5 +688,102 @@ body {
         transform: translateX(400px);
         opacity: 0;
     }
+}
+
+/* ランタイム情報パネル */
+.runtime-info {
+    margin: 15px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.runtime-info-header {
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    border-bottom: 2px solid #ccc;
+}
+
+.runtime-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.runtime-badge.podman {
+    background: linear-gradient(135deg, #8E24AA 0%, #5E35B1 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(142, 36, 170, 0.3);
+}
+
+.runtime-badge.docker {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.runtime-info-content {
+    padding: 15px;
+    background: white;
+}
+
+.runtime-info-content h4 {
+    color: #333;
+    font-size: 14px;
+    margin: 10px 0 8px 0;
+    font-weight: bold;
+}
+
+.runtime-info-content h4:first-child {
+    margin-top: 0;
+}
+
+.runtime-info-content ul {
+    margin: 0 0 10px 0;
+    padding-left: 20px;
+}
+
+.runtime-info-content li {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.runtime-info-content li strong {
+    color: #CC0000;
+}
+
+.runtime-info-content code {
+    background: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #8E24AA;
+}
+
+/* ランタイムアドバイス */
+.runtime-advice {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+    border-left: 4px solid #FBC02D;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.runtime-advice code {
+    background: #FFF;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #8E24AA;
+    border: 1px solid #FDD835;
 }
 

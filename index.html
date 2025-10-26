@@ -12,6 +12,7 @@
         <header class="header">
             <h1>🎩 Container File Builder</h1>
             <div class="header-buttons">
+                <button id="runtimeToggle" class="btn btn-runtime" title="Switch Runtime: Docker ⇄ Podman"><span id="runtimeIcon">🎩</span> <span id="runtimeName">Podman</span></button>
                 <button id="langToggle" class="btn btn-secondary" title="Switch Language / 言語切替">🌐 <span id="currentLang">日本語</span></button>
                 <button id="clearBtn" class="btn btn-warning"><span class="i18n" data-ja="クリア" data-en="Clear">クリア</span></button>
                 <button id="previewBtn" class="btn btn-primary"><span class="i18n" data-ja="プレビュー" data-en="Preview">プレビュー</span></button>
@@ -100,6 +101,9 @@
                     </div>
                 </div>
 
+                <!-- ランタイム情報パネル -->
+                <div id="runtimeInfo" class="runtime-info"></div>
+
                 <h2>👀 <span class="i18n" data-ja="Containerfileプレビュー" data-en="Containerfile Preview">Containerfileプレビュー</span></h2>
                 <div class="preview-content">
                     <pre id="preview"><code class="i18n" data-ja="# ここにContainerfileが表示されます
@@ -136,6 +140,7 @@
     <script src="js/dragdrop.js"></script>
     <script src="js/preview.js"></script>
     <script src="js/i18n.js"></script>
+    <script src="js/runtime.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
