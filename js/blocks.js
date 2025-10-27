@@ -1,3 +1,36 @@
+// コマンド文字列を引用符を考慮して分割する関数
+function parseCommand(cmd) {
+    const parts = [];
+    let current = '';
+    let inQuotes = false;
+    let quoteChar = '';
+    
+    for (let i = 0; i < cmd.length; i++) {
+        const char = cmd[i];
+        
+        if ((char === '"' || char === "'") && !inQuotes) {
+            inQuotes = true;
+            quoteChar = char;
+        } else if (char === quoteChar && inQuotes) {
+            inQuotes = false;
+            quoteChar = '';
+        } else if (char === ' ' && !inQuotes) {
+            if (current.trim()) {
+                parts.push(current.trim());
+                current = '';
+            }
+        } else {
+            current += char;
+        }
+    }
+    
+    if (current.trim()) {
+        parts.push(current.trim());
+    }
+    
+    return parts.length > 0 ? parts : ['bash'];
+}
+
 // Dockerfileの各命令ブロックの定義
 const blockDefinitions = {
     // 基本命令
@@ -70,8 +103,8 @@ const blockDefinitions = {
         ],
         generate: (values) => {
             const cmd = values.command || 'bash';
-            // JSON配列形式に変換
-            const parts = cmd.split(' ').filter(p => p.trim());
+            // 引用符を考慮してコマンドを分割
+            const parts = parseCommand(cmd);
             return `CMD ${JSON.stringify(parts)}`;
         }
     },
@@ -267,7 +300,8 @@ const blockDefinitions = {
         ],
         generate: (values) => {
             const cmd = values.command || 'sh';
-            const parts = cmd.split(' ').filter(p => p.trim());
+            // 引用符を考慮してコマンドを分割
+            const parts = parseCommand(cmd);
             return `ENTRYPOINT ${JSON.stringify(parts)}`;
         }
     },
