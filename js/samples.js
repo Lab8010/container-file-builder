@@ -54,6 +54,41 @@ const samples = {
         h1 { font-size: 2.5em; margin-bottom: 20px; }
         p { font-size: 1.2em; line-height: 1.6; }
         .logo { font-size: 4em; text-align: center; }
+        .links {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+        }
+        .links h3 {
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        .link-button {
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .link-button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -65,6 +100,28 @@ const samples = {
         <hr style="margin: 30px 0; border: 1px solid rgba(255,255,255,0.3);">
         <p><strong>サンプル:</strong> 静的Webサーバー (Apache httpd on Fedora)</p>
         <p><strong>Sample:</strong> Static Web Server (Apache httpd on Fedora)</p>
+        
+        <div class="links">
+            <h3>🌐 Container File Builder について</h3>
+            <p style="font-size: 1em;">Scratchライクな操作でContainerfile/Dockerfileを簡単に作成できる、子供向けビジュアルプログラミングツールです。</p>
+            <p style="font-size: 1em;">A visual programming tool for creating Containerfiles/Dockerfiles with Scratch-like UI.</p>
+            
+            <div style="margin-top: 20px;">
+                <a href="https://lab8010.github.io/container-file-builder/" class="link-button" target="_blank">
+                    🚀 オンラインで試す
+                    <span class="badge">GitHub Pages</span>
+                </a>
+                <a href="https://github.com/Lab8010/container-file-builder" class="link-button" target="_blank">
+                    💻 ソースコード
+                    <span class="badge">GitHub</span>
+                </a>
+            </div>
+            
+            <p style="font-size: 0.9em; margin-top: 20px; opacity: 0.9;">
+                ✅ 全14種類の命令ブロック | ✅ 3つのサンプル | ✅ 日本語・英語対応<br>
+                ✅ Docker/Podman対応 | ✅ Red Hat最適化 | ✅ MITライセンス
+            </p>
+        </div>
     </div>
 </body>
 </html>`
